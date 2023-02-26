@@ -1,0 +1,14 @@
+body, #root, .index {
+  height: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-image:url("../public/background.jpg");
+  background-size: cover;
+  align-items: center;
+}
+
+.routing { 
+  border: 1p solid #5eb2b6;
+  height: 100%;
+}

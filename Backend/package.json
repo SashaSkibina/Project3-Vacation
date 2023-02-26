@@ -1,0 +1,33 @@
+{
+  "name": "project3-backend",
+  "version": "1.0.0",
+  "description": "Let's build our project from scratch!\r Here I will write my actions chronologically with a lot of comments and explanations.\r The purpose of this file is to help myself understand the code I'm writing so I would be able to do further research on various topics.\r However, this is a brain dump. The more I write here the easier it would be to think things trough!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon --exec ts-node server.ts"
+  },
+  "author": "sasha skibin",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/express-fileupload": "^1.4.1",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/mysql": "^2.15.21",
+    "@types/node": "^18.11.18",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "mysql": "^2.18.1"
+  }
+}

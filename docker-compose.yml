@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+  db:
+    container_name: db
+    image: mysql:5.7
+    ports:
+    # to check what port was exposed by the docker image: docker inspect <imageid>
+    # since the default port for mysql is used by my local machine i will change the host port in this mapping
+      - "3303:3306"
+    # volumes:
+    #   - data:/data
+    environment:
+      MYSQL_ROOT_USERNAME: "root"
+      MYSQL_ROOT_PASSWORD: "12345678"
+      MYSQL_DATABASE: p3vacation
+      ACCEPT_EULA: "Y"
+    restart: always
+    networks:
+      - vacation-network
+    volumes:
+      - db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    container_name: vacation_backend
+    image: vacation_backend:1.0.0
+    build: ./backend
+    ports:
+    # when i'm the one creating the image (using a Dockerfile) - I can expose whatever port I want and specify it here
+      - 3100:3100
+    environment:
+      # NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: "12345678"
+      DB_NAME: p3vacation
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - vacation-network
+    # links:
+    #   - db
+    volumes:
+      - ./:/src
+  
+  frontend:
+    container_name: vacation_frontend
+    image: vacation_frontend:1.0.0
+    build: ./frontend
+    ports:
+    # mapping port 3000 of the host to port 3000 of the container running this image
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - vacation-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  vacation-network:
+    driver: bridge
+
+
+  # docker-compose build
+  # docker-compose up -d
